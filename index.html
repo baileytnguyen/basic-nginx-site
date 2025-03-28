@@ -1,180 +1,414 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Friendly Software Gallery</title>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+    />
     <style>
-        body {
-            background-color: #121212;
-            color: #ffffff;
-        }
-
-        .card {
-            background-color: #1e1e1e;
-            border: 1px solid #333;
-        }
-
-        .card-text {
-            color: #ffffff;
-        }
-
-        .card-img-top {
-            border-bottom: 1px solid #333;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            margin-bottom: 20px;
-            background-color: #1e1e1e;
-            color: #ffffff;
-        }
+      :root {
+        --background-color: white;
+        --text-color: black;
+        --card-background-color: white;
+        --card-border-color: #ddd;
+        --card-text-color: black;
+        --footer-background-color: #f8f9fa;
+        --footer-text-color: black;
+        --button-background: none;
+        --button-color: black;
+        --button-hover-background: rgba(0, 0, 0, 0.1);
+        --button-hover-color: black;
+        --button-active-background: rgba(0, 0, 0, 0.2);
+        --button-active-color: black;
+      }
+      .dark-mode {
+        --background-color: #121212;
+        --text-color: #ffffff;
+        --card-background-color: #1e1e1e;
+        --card-border-color: #333;
+        --card-text-color: #ffffff;
+        --footer-background-color: #1e1e1e;
+        --footer-text-color: #ffffff;
+        --button-background: none;
+        --button-color: #ffffff;
+        --button-hover-background: rgba(255, 255, 255, 0.1);
+        --button-hover-color: white;
+        --button-active-background: rgba(255, 255, 255, 0.2);
+        --button-active-color: white;
+      }
+      body {
+        background-color: var(--background-color);
+        color: var(--text-color);
+        transition: background 0.3s, color 0.3s;
+        font-family: Arial, sans-serif;
+      }
+      .theme-button {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background: var(--background-color);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .header-content {
+        max-width: 1140px;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--text-color);
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+      .card {
+        background-color: var(--card-background-color);
+        border: 1px solid var(--card-border-color);
+        margin-bottom: 15px;
+        border-radius: 8px;
+        transition: background-color 0.3s, border-color 0.3s;
+      }
+      .card-text {
+        color: var(--card-text-color);
+      }
+      .card-img-top {
+        border-bottom: 1px solid var(--card-border-color);
+      }
+      footer {
+        text-align: center;
+        padding: 20px;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        background-color: var(--footer-background-color);
+        color: var(--footer-text-color);
+      }
+      .footer-content {
+        max-width: 1140px; /* Aligns with content */
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+      }
+      #btn-back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: none;
+      }
+      /* Custom button color */
+      .btn-custom {
+        background-color: #0070f3; /* Set the background color to blue */
+        color: white; /* Set the text/icon color to white */
+        border: none; /* Remove default border */
+      }
+      .btn-custom:hover {
+        background-color: #005bb5; /* Darker shade of blue for hover effect */
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
+    <header>
+      <div class="header-content">
+        <div class="logo">FriendlySoftware</div>
+        <button id="theme-toggle" class="theme-button">
+          <span id="theme-icon">🌙</span>
+        </button>
+      </div>
+    </header>
     <div class="container mt-4">
-        <h1 class="text-center mb-4">Friendly Software Gallery</h1>
-        <div class="row">
-            <!-- Repeat this block for each image -->
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="card">
-                    <img src="./web_images/pexels-daniyal-ghanavati-10741-70069.jpg" class="card-img-top" alt="Image 1">
-                    <div class="card-body text-center">
-                        <p class="card-text">A small bird perched gracefully on a slender branch, its feathers ruffled
-                            by the gentle breeze, while the surrounding greenery adds a soft backdrop to its peaceful
-                            moment in nature.</p>
-                    </div>
-                </div>
+      <h1 class="text-center mb-4">Home Gallery</h1>
+      <div class="row">
+        <!-- Repeat this block for each image -->
+        <div class="col-6 col-md-4 col-lg-3 mb-4">
+          <div class="card">
+            <img
+              src="./cat_web_images/cat1.jpeg"
+              class="card-img-top"
+              alt="Image 1"
+            />
+            <div class="card-body text-center">
+              <p class="card-text">
+                A small bird perched gracefully on a slender branch, its
+                feathers ruffled by the gentle breeze, while the surrounding
+                greenery adds a soft backdrop to its peaceful moment in nature.
+              </p>
             </div>
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="card">
-                    <img src="./web_images/pexels-asadphoto-240526.jpg" class="card-img-top" alt="Image 2">
-                    <div class="card-body text-center">
-                        <p class="card-text">A tall palm tree stands proudly on a sandy beach, its fronds swaying in the
-                            warm ocean breeze, casting a soothing shadow over the golden shoreline as the waves gently
-                            lap at the coast.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="card">
-                    <img src="./web_images/pexels-eberhardgross-2098427.jpg" class="card-img-top" alt="Image 2">
-                    <div class="card-body text-center">
-                        <p class="card-text">A breathtaking night sky filled with twinkling stars stretches above a
-                            rugged mountain range, their peaks silhouetted against the vast expanse of the cosmos,
-                            creating a serene and awe-inspiring scene.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="card">
-                    <img src="./web_images/pexels-francesco-ungaro-2325447.jpg" class="card-img-top" alt="Image 2">
-                    <div class="card-body text-center">
-                        <p class="card-text">A vibrant hot air balloon drifts gracefully above a desert mountain, its
-                            colorful fabric contrasting against the vast, golden sands below. The rugged peaks rise in
-                            the distance, bathed in the warm glow of the setting sun, as the balloon glides peacefully
-                            through the clear sky.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="card">
-                    <img src="./web_images/pexels-ithalu-907485.jpg" class="card-img-top" alt="Image 2">
-                    <div class="card-body text-center">
-                        <p class="card-text">A soft pink sunset paints the sky with hues of lavender and rose, casting a
-                            warm, gentle glow over the horizon. The fading light reflects off clouds, creating a serene
-                            and dreamy atmosphere as the day transitions into night.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="card">
-                    <img src="./web_images/pexels-jmark-250591.jpg" class="card-img-top" alt="Image 2">
-                    <div class="card-body text-center">
-                        <p class="card-text">A delicate cherry blossom branch stretches gracefully, adorned with soft
-                            pink flowers in full bloom. The petals flutter in the breeze, creating a gentle cascade of
-                            color against the clear sky, symbolizing the fleeting beauty of spring.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="card">
-                    <img src="./web_images/pexels-jonaskakaroto-736230.jpg" class="card-img-top" alt="Image 2">
-                    <div class="card-body text-center">
-                        <p class="card-text">A velvety pink rose blooms in full glory, its soft, layered petals
-                            unfolding in delicate symmetry. The subtle blush of the petals contrasts beautifully with
-                            the deep green of the surrounding leaves, radiating elegance and timeless beauty.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="card">
-                    <img src="./web_images/pexels-lum3n-44775-167684.jpg" class="card-img-top" alt="Image 2">
-                    <div class="card-body text-center">
-                        <p class="card-text">A misty mountain range looms in the distance, its towering peaks partially
-                            veiled by a soft, ethereal fog. Tall pine trees line the lower slopes, their dark green
-                            needles contrasting with the pale, mist-covered landscape, creating a serene and mysterious
-                            atmosphere.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="card">
-                    <img src="./web_images/pexels-pawelkalisinski-1076758.jpg" class="card-img-top" alt="Image 2">
-                    <div class="card-body text-center">
-                        <p class="card-text">A vibrant orange jellyfish drifts gracefully through the water, its
-                            translucent, bell-shaped body gently pulsating with each movement. Its long, flowing
-                            tentacles trail behind, swaying with the current, creating an otherworldly, glowing presence
-                            in the deep blue sea.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="card">
-                    <img src="./web_images/pexels-philippedonn-1133957.jpg" class="card-img-top" alt="Image 2">
-                    <div class="card-body text-center">
-                        <p class="card-text">A vibrant hummingbird hovers delicately in the air, its iridescent feathers
-                            shimmering as it approaches a vivid red flower. With wings beating rapidly, it reaches out
-                            to sip the nectar, creating a beautiful moment of harmony between nature's colors and
-                            energy.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="card">
-                    <img src="./web_images/pexels-pixabay-147411.jpg" class="card-img-top" alt="Image 2">
-                    <div class="card-body text-center">
-                        <p class="card-text">A cozy cabin sits nestled beside a serene freshwater lake, surrounded by
-                            towering pine trees. In the background, majestic mountains rise, their snow-capped peaks
-                            reflecting on the calm water. The peaceful setting exudes a sense of tranquility and escape
-                            into nature.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="card">
-                    <img src="./web_images/pexels-pixabay-39517.jpg" class="card-img-top" alt="Image 2">
-                    <div class="card-body text-center">
-                        <p class="card-text">Two delicate flowers with vibrant orange petals and soft white accents
-                            bloom side by side. Their contrasting colors create a striking yet harmonious display, while
-                            their gentle petals seem to sway in the breeze, adding a touch of natural beauty to the
-                            surroundings.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Add more images similarly -->
+          </div>
         </div>
+        <div class="col-6 col-md-4 col-lg-3 mb-4">
+          <div class="card">
+            <img
+              src="./cat_web_images/cat2.jpeg"
+              class="card-img-top"
+              alt="Image 2"
+            />
+            <div class="card-body text-center">
+              <p class="card-text">
+                A tall palm tree stands proudly on a sandy beach, its fronds
+                swaying in the warm ocean breeze, casting a soothing shadow over
+                the golden shoreline as the waves gently lap at the coast.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 mb-4">
+          <div class="card">
+            <img
+              src="./cat_web_images/cat3.jpeg"
+              class="card-img-top"
+              alt="Image 2"
+            />
+            <div class="card-body text-center">
+              <p class="card-text">
+                A breathtaking night sky filled with twinkling stars stretches
+                above a rugged mountain range, their peaks silhouetted against
+                the vast expanse of the cosmos, creating a serene and
+                awe-inspiring scene.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 mb-4">
+          <div class="card">
+            <img
+              src="./cat_web_images/cat4.jpeg"
+              class="card-img-top"
+              alt="Image 2"
+            />
+            <div class="card-body text-center">
+              <p class="card-text">
+                A vibrant hot air balloon drifts gracefully above a desert
+                mountain, its colorful fabric contrasting against the vast,
+                golden sands below. The rugged peaks rise in the distance,
+                bathed in the warm glow of the setting sun, as the balloon
+                glides peacefully through the clear sky.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 mb-4">
+          <div class="card">
+            <img
+              src="./cat_web_images/cat5.jpeg"
+              class="card-img-top"
+              alt="Image 2"
+            />
+            <div class="card-body text-center">
+              <p class="card-text">
+                A soft pink sunset paints the sky with hues of lavender and
+                rose, casting a warm, gentle glow over the horizon. The fading
+                light reflects off clouds, creating a serene and dreamy
+                atmosphere as the day transitions into night.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 mb-4">
+          <div class="card">
+            <img
+              src="./cat_web_images/cat6.jpeg"
+              class="card-img-top"
+              alt="Image 2"
+            />
+            <div class="card-body text-center">
+              <p class="card-text">
+                A delicate cherry blossom branch stretches gracefully, adorned
+                with soft pink flowers in full bloom. The petals flutter in the
+                breeze, creating a gentle cascade of color against the clear
+                sky, symbolizing the fleeting beauty of spring.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 mb-4">
+          <div class="card">
+            <img
+              src="./cat_web_images/cat7.jpeg"
+              class="card-img-top"
+              alt="Image 2"
+            />
+            <div class="card-body text-center">
+              <p class="card-text">
+                A velvety pink rose blooms in full glory, its soft, layered
+                petals unfolding in delicate symmetry. The subtle blush of the
+                petals contrasts beautifully with the deep green of the
+                surrounding leaves, radiating elegance and timeless beauty.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 mb-4">
+          <div class="card">
+            <img
+              src="./cat_web_images/cat8.jpeg"
+              class="card-img-top"
+              alt="Image 2"
+            />
+            <div class="card-body text-center">
+              <p class="card-text">
+                A misty mountain range looms in the distance, its towering peaks
+                partially veiled by a soft, ethereal fog. Tall pine trees line
+                the lower slopes, their dark green needles contrasting with the
+                pale, mist-covered landscape, creating a serene and mysterious
+                atmosphere.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 mb-4">
+          <div class="card">
+            <img
+              src="./cat_web_images/cat9.jpeg"
+              class="card-img-top"
+              alt="Image 2"
+            />
+            <div class="card-body text-center">
+              <p class="card-text">
+                A vibrant orange jellyfish drifts gracefully through the water,
+                its translucent, bell-shaped body gently pulsating with each
+                movement. Its long, flowing tentacles trail behind, swaying with
+                the current, creating an otherworldly, glowing presence in the
+                deep blue sea.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 mb-4">
+          <div class="card">
+            <img
+              src="./cat_web_images/cat10.jpeg"
+              class="card-img-top"
+              alt="Image 2"
+            />
+            <div class="card-body text-center">
+              <p class="card-text">
+                A vibrant hummingbird hovers delicately in the air, its
+                iridescent feathers shimmering as it approaches a vivid red
+                flower. With wings beating rapidly, it reaches out to sip the
+                nectar, creating a beautiful moment of harmony between nature's
+                colors and energy.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 mb-4">
+          <div class="card">
+            <img
+              src="./cat_web_images/cat11.jpeg"
+              class="card-img-top"
+              alt="Image 2"
+            />
+            <div class="card-body text-center">
+              <p class="card-text">
+                A cozy cabin sits nestled beside a serene freshwater lake,
+                surrounded by towering pine trees. In the background, majestic
+                mountains rise, their snow-capped peaks reflecting on the calm
+                water. The peaceful setting exudes a sense of tranquility and
+                escape into nature.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 mb-4">
+          <div class="card">
+            <img
+              src="./cat_web_images/cat12.jpeg"
+              class="card-img-top"
+              alt="Image 2"
+            />
+            <div class="card-body text-center">
+              <p class="card-text">
+                Two delicate flowers with vibrant orange petals and soft white
+                accents bloom side by side. Their contrasting colors create a
+                striking yet harmonious display, while their gentle petals seem
+                to sway in the breeze, adding a touch of natural beauty to the
+                surroundings.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Add more images similarly -->
+      </div>
     </div>
-    <footer class="footer">
-        2025, friendlysoftware.co
-    </footer>
+    <button
+      type="button"
+      class="btn btn-custom btn-floating btn-lg"
+      id="btn-back-to-top"
+    >
+      <i class="bi bi-arrow-up"></i>
+    </button>
+    <footer class="footer">2025, friendlysoftware.co</footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+    <script>
+      // Theme toggle functionality
+      const themeToggle = document.getElementById("theme-toggle");
+      const themeIcon = document.getElementById("theme-icon");
 
+      function setTheme(theme) {
+        document.body.classList.toggle("dark-mode", theme === "dark");
+        themeIcon.textContent = theme === "dark" ? "🌞" : "🌙";
+        localStorage.setItem("theme", theme);
+      }
+
+      themeToggle.addEventListener("click", () => {
+        const currentTheme = document.body.classList.contains("dark-mode")
+          ? "light"
+          : "dark";
+        setTheme(currentTheme);
+      });
+
+      // Load saved theme
+      setTheme(localStorage.getItem("theme") || "light");
+
+      /* Back to top button functionality */
+      //Get the button
+      let mybutton = document.getElementById("btn-back-to-top");
+
+      // When the user scrolls down 20px from the top of the document, show the button
+      window.onscroll = function () {
+        scrollFunction();
+      };
+
+      function scrollFunction() {
+        if (
+          document.body.scrollTop > 20 ||
+          document.documentElement.scrollTop > 20
+        ) {
+          mybutton.style.display = "block";
+        } else {
+          mybutton.style.display = "none";
+        }
+      }
+      // When the user clicks on the button, scroll to the top of the document
+      mybutton.addEventListener("click", backToTop);
+
+      function backToTop() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      }
+    </script>
+  </body>
 </html>
